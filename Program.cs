@@ -6,57 +6,52 @@ namespace Loto
     {
         static void Main(string[] args)
         {
-            
+            //Loto newGame = new Loto();
+            //newGame.Start();
+            //Console.ReadKey();
             int[] numeros = new int[7];
             auHasard(numeros);
             Console.WriteLine("***** Tirage du Loto ******");
+            Console.WriteLine(("").PadRight(26, '-'));
             foreach (int num in numeros)
             {
-               Console.WriteLine(num);
+                Console.WriteLine(num);
             }
 
-            static void auHasard(int []tabl)
+            static void auHasard(int[] tabl)
             {
-                var rand = new Random();
-                tabl[0] = rand.Next(1, 49);
-                //bool deja;
+                Random rand = new Random();
+                
+                bool deja;
+                
                 for (int i = 1; i < tabl.Length; i++)
                 {
-                    //deja = dejaTirer(tabl);
-                    if (tabl[i - 1] != tabl[i])
+                    tabl[i] = rand.Next(1, 49);
+                    deja = dejaTirer(tabl[i], tabl);
+                   
+                    if (!deja)
                     {
                         tabl[i] = rand.Next(1, 49);
-                    }
-                    else
-                    {
-                        break;
-                    }                   
-                    
-                    //Console.WriteLine(tabl[i]);
+                    }   
+                           
                 }
             }
 
-
-            static bool dejaTirer(int[] tab)
+            static bool dejaTirer(int chiffre, int[] tabl)
             {
-                bool deja = true;
-                for (int i = 1; i < tab.Length; i++)
+
+                for (int i = 0; i < tabl.Length; i++)
                 {
-                    if (tab[i-1] != tab[i])
+                    if (tabl[i] == chiffre)
                     {
-                        deja = false;
-                    }
-                    else
-                    {
-                        deja = true;
+                        return true;
                     }
                 }
-                return deja;
-
+                return false;
             }
-        }
 
+
+        }
     }
 
-       
 }
